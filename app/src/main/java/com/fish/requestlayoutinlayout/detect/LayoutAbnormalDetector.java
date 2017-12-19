@@ -2,21 +2,11 @@ package com.fish.requestlayoutinlayout.detect;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.ViewTreeObserver;
-import android.widget.TextView;
 
-import com.fish.requestlayoutinlayout.view.ALinearLayout_V3;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,9 +15,9 @@ import java.util.Map;
  * yuxm_zju@aliyun.com
  */
 
-public class RequestAbnormalDetector {
+public class LayoutAbnormalDetector {
 
-    private static final String TAG = "RequestAbnormalDetector";
+    private static final String TAG = "LayoutAbnormalDetector";
     private static boolean on = false;
     private static Map<Activity, DetectorImpl> detectorMap = new HashMap<>();
 
@@ -66,7 +56,7 @@ public class RequestAbnormalDetector {
         Activity activity = getActivity(abnormalView);
         if (activity != null && parent != null && parent.isLayoutRequested() && detectorMap.keySet().contains(activity)) {
             //关键测试代码
-            Log.w(TAG, "@preRequest parent isLayoutRequested " + abnormalView + " parent: " + parent + " activity: " + activity);
+            Log.d(TAG, "@preRequest parent isLayoutRequested " + abnormalView + " parent: " + parent + " activity: " + activity);
 
             detectorMap.get(activity).recordStack(abnormalView, Log.getStackTraceString(new RequestLayoutException()));
 

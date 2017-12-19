@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
-import com.fish.requestlayoutinlayout.base.ScreenUtil;
-import com.fish.requestlayoutinlayout.util.Switch;
+import com.fish.requestlayoutinlayout.detect.LayoutAbnormalDetector;
 import com.fish.requestlayoutinlayout.view.ALinearLayout1;
 import com.fish.requestlayoutinlayout.view.AFrameLayout2;
 
@@ -44,7 +42,7 @@ public class DemoActivity1 extends AppCompatActivity {
         });
 
         //
-        RequestAbnormalDetector.start(this);
+        LayoutAbnormalDetector.start(this);
     }
 
 }

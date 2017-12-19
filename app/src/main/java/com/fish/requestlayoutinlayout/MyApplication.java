@@ -3,7 +3,7 @@ package com.fish.requestlayoutinlayout;
 import android.app.Application;
 
 import com.fish.requestlayoutinlayout.base.ScreenUtil;
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
+import com.fish.requestlayoutinlayout.detect.LayoutAbnormalDetector;
 
 /**
  * Created by fish on 2017/12/16.
@@ -15,6 +15,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ScreenUtil.init(this);
-        RequestAbnormalDetector.setOn(true);
+        LayoutAbnormalDetector.setOn(true);
     }
 }

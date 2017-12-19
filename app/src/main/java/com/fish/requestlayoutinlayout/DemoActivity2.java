@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
 import com.fish.requestlayoutinlayout.util.Switch;
 import com.fish.requestlayoutinlayout.view.AFrameLayout2;
 import com.fish.requestlayoutinlayout.view.ALinearLayout1;

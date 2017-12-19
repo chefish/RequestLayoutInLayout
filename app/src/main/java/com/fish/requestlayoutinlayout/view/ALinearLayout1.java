@@ -1,5 +1,4 @@
 package com.fish.requestlayoutinlayout.view;
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
 
 import android.content.Context;
 import android.support.annotation.AttrRes;

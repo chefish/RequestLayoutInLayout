@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
+import com.fish.requestlayoutinlayout.detect.LayoutAbnormalDetector;
 
 /**
  * Created by fish on 2017/12/15.
@@ -35,7 +35,7 @@ public class ALinearLayout_V3 extends LinearLayout {
     public void forceLayout() {
         super.forceLayout();
         //tell RequestAbnormalDetector
-        RequestAbnormalDetector.afterForceLayout(this);
+        LayoutAbnormalDetector.afterForceLayout(this);
     }
 
 }

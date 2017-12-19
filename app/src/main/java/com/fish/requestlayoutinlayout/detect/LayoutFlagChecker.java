@@ -3,8 +3,6 @@ package com.fish.requestlayoutinlayout.detect;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fish.requestlayoutinlayout.view.ALinearLayout_V3;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +19,13 @@ class LayoutFlagChecker {
     private View lastTrueView;
 
 
-    public static class LayoutFlagCheckerResult {
+    public static class Result {
         public Element deepElement;
         public List<View> views = new ArrayList<>();
         //last PFLAG_FORCE_LAYOUT true的view
         public View lastTrueView;
 
-        public LayoutFlagCheckerResult(Element deepElement, List<View> views, View lastTrueView) {
+        public Result(Element deepElement, List<View> views, View lastTrueView) {
             this.deepElement = deepElement;
             this.views = views;
             this.lastTrueView = lastTrueView;
@@ -46,7 +44,7 @@ class LayoutFlagChecker {
     }
 
 
-    public LayoutFlagCheckerResult checkLayoutFlag(View view, int depth) {
+    public Result checkLayoutFlag(View view, int depth) {
         views.add(view);
         //self
         if (depth > getMaxDepth()) {
@@ -67,7 +65,7 @@ class LayoutFlagChecker {
         }
 
         findLastRequestedView();
-        return new LayoutFlagCheckerResult(deepElement, views, lastTrueView);
+        return new Result(deepElement, views, lastTrueView);
     }
 
     private void findLastRequestedView() {

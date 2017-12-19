@@ -1,7 +1,6 @@
 package com.fish.requestlayoutinlayout.detect;
 
 import android.app.Activity;
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,8 +20,9 @@ import java.util.Map;
 
 class DetectorImpl {
     private static final String TAG = "DetectorImpl";
-    private Activity activity;
+    private final Activity activity;
     private View contentView;
+    private ViewGroup contentFrameLayout;
     private Map<View, String> stackMap = new HashMap<>();
 
     private boolean isStart;
@@ -31,14 +31,14 @@ class DetectorImpl {
 
     DetectorImpl(Activity activity) {
         this.activity = activity;
-        ViewGroup contentFrameLayout = (ViewGroup) activity.getWindow().getDecorView().findViewById(android.R.id.content);
-        contentView = contentFrameLayout.getChildAt(0);
+//        initContentView(activity);
+        contentFrameLayout = (ViewGroup) activity.getWindow().getDecorView().findViewById(android.R.id.content);
+
         observe();
     }
 
-
     private void observe() {
-        contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        contentFrameLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (!isStart()) {
@@ -46,7 +46,8 @@ class DetectorImpl {
                 }
 
                 LayoutFlagChecker layoutFlagChecker = new LayoutFlagChecker();
-                LayoutFlagChecker.LayoutFlagCheckerResult result = layoutFlagChecker.checkLayoutFlag(contentView, 0);
+                ensureContentView();
+                LayoutFlagChecker.Result result = layoutFlagChecker.checkLayoutFlag(contentView, 0);
                 if (result.isEmpty()) {
                     Log.d(TAG, "@onGlobalLayout " + " well ");
                     stackMap.clear();
@@ -64,11 +65,18 @@ class DetectorImpl {
         });
     }
 
+    private void ensureContentView() {
+        //maybe contentview is replaced as setContentView again,so add getParent judgement
+        if (contentView == null || contentView.getParent() == null) {
+            contentView = contentFrameLayout.getChildAt(0);
+        }
+    }
+
     private boolean isStart() {
         return isStart;
     }
 
-    public void recordStack(View v, String stackTraceString) {
+    void recordStack(View v, String stackTraceString) {
         if (!isStart()) {
             return;
         }
@@ -86,7 +94,7 @@ class DetectorImpl {
         }
     }
 
-    private void printAbnormalDepth(LayoutFlagChecker.LayoutFlagCheckerResult result) {
+    private void printAbnormalDepth(LayoutFlagChecker.Result result) {
         View view = result.deepElement.view;
         int deep = result.deepElement.depth;
         while (deep >= 0) {
@@ -121,7 +129,7 @@ class DetectorImpl {
         Log.e(TAG, "please preRequest this: " + lastTrueView + " in activity: " + activity);
     }
 
-    private void handleStack(LayoutFlagChecker.LayoutFlagCheckerResult result) {
+    private void handleStack(LayoutFlagChecker.Result result) {
         if (activity != null) {
             filterStackMap(result.views, stackMap);
             String currentStack = stackMap.get(result.lastTrueView);

@@ -8,7 +8,8 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.fish.requestlayoutinlayout.base.LogUtil;
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
+import com.fish.requestlayoutinlayout.detect.LayoutAbnormalDetector;
+
 /**
  * Created by fish on 2017/12/15.
  * yuxm_zju@aliyun.com
@@ -29,7 +30,7 @@ public class AFrameLayout2 extends FrameLayout {
 
     @Override
     public void requestLayout() {
-        RequestAbnormalDetector.preRequestLayout(this);
+        LayoutAbnormalDetector.preRequestLayout(this);
         super.requestLayout();
         LogUtil.d("AFrameLayout2@requestLayout");
     }

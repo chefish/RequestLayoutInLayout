@@ -2,12 +2,10 @@ package com.fish.requestlayoutinlayout;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
-import com.fish.requestlayoutinlayout.detect.RequestAbnormalDetector;
+import com.fish.requestlayoutinlayout.detect.LayoutAbnormalDetector;
 import com.fish.requestlayoutinlayout.util.Switch;
 import com.fish.requestlayoutinlayout.view.AFrameLayout2;
 import com.fish.requestlayoutinlayout.view.ALinearLayout1;
@@ -51,13 +49,13 @@ public class DemoActivity3 extends AppCompatActivity {
 //                Log.d(TAG, "@onGlobalLayout A1: " + aFrameLayout1.isLayoutRequested() + " A2: " + aFrameLayout2.isLayoutRequested());
 //            }
 //        });
-        RequestAbnormalDetector.start(this);
+        LayoutAbnormalDetector.start(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RequestAbnormalDetector.stop(this);
+        LayoutAbnormalDetector.stop(this);
     }
 
 }
