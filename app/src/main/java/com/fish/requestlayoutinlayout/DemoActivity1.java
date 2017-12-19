@@ -17,6 +17,7 @@ import com.fish.requestlayoutinlayout.view.AFrameLayout2;
 public class DemoActivity1 extends AppCompatActivity {
     TextView textView;
     ALinearLayout1 aFrameLayout1;
+
     AFrameLayout2 aFrameLayout2;
     private static final String TAG = "DemoActivity1";
 
